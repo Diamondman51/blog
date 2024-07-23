@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'blogs'
 ]
 
 MIDDLEWARE = [
@@ -122,6 +123,8 @@ STATICFILES_DIRS = [
     'blog_site/static'
 ]
 
+MEDIA_URL = 'media'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

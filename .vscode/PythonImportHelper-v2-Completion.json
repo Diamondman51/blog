@@ -1,5 +1,69 @@
 [
     {
+        "label": "admin",
+        "importPath": "django.contrib",
+        "description": "django.contrib",
+        "isExtraImport": true,
+        "detail": "django.contrib",
+        "documentation": {}
+    },
+    {
+        "label": "admin",
+        "importPath": "django.contrib",
+        "description": "django.contrib",
+        "isExtraImport": true,
+        "detail": "django.contrib",
+        "documentation": {}
+    },
+    {
+        "label": "AppConfig",
+        "importPath": "django.apps",
+        "description": "django.apps",
+        "isExtraImport": true,
+        "detail": "django.apps",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "User",
+        "importPath": "django.contrib.auth.models",
+        "description": "django.contrib.auth.models",
+        "isExtraImport": true,
+        "detail": "django.contrib.auth.models",
+        "documentation": {}
+    },
+    {
+        "label": "TestCase",
+        "importPath": "django.test",
+        "description": "django.test",
+        "isExtraImport": true,
+        "detail": "django.test",
+        "documentation": {}
+    },
+    {
+        "label": "render",
+        "importPath": "django.shortcuts",
+        "description": "django.shortcuts",
+        "isExtraImport": true,
+        "detail": "django.shortcuts",
+        "documentation": {}
+    },
+    {
+        "label": "render",
+        "importPath": "django.shortcuts",
+        "description": "django.shortcuts",
+        "isExtraImport": true,
+        "detail": "django.shortcuts",
+        "documentation": {}
+    },
+    {
         "label": "os",
         "kind": 6,
         "isExtraImport": true,
@@ -25,19 +89,27 @@
         "documentation": {}
     },
     {
-        "label": "admin",
-        "importPath": "django.contrib",
-        "description": "django.contrib",
-        "isExtraImport": true,
-        "detail": "django.contrib",
-        "documentation": {}
-    },
-    {
         "label": "path",
         "importPath": "django.urls",
         "description": "django.urls",
         "isExtraImport": true,
         "detail": "django.urls",
+        "documentation": {}
+    },
+    {
+        "label": "settings",
+        "importPath": "django.conf",
+        "description": "django.conf",
+        "isExtraImport": true,
+        "detail": "django.conf",
+        "documentation": {}
+    },
+    {
+        "label": "static",
+        "importPath": "django.conf.urls.static",
+        "description": "django.conf.urls.static",
+        "isExtraImport": true,
+        "detail": "django.conf.urls.static",
         "documentation": {}
     },
     {
@@ -49,11 +121,19 @@
         "documentation": {}
     },
     {
-        "label": "render",
-        "importPath": "django.shortcuts",
-        "description": "django.shortcuts",
+        "label": "MEDIA_ROOT",
+        "importPath": "blog_site.settings",
+        "description": "blog_site.settings",
         "isExtraImport": true,
-        "detail": "django.shortcuts",
+        "detail": "blog_site.settings",
+        "documentation": {}
+    },
+    {
+        "label": "MEDIA_URL",
+        "importPath": "blog_site.settings",
+        "description": "blog_site.settings",
+        "isExtraImport": true,
+        "detail": "blog_site.settings",
         "documentation": {}
     },
     {
@@ -71,6 +151,51 @@
         "importPath": "sys",
         "description": "sys",
         "detail": "sys",
+        "documentation": {}
+    },
+    {
+        "label": "BlogAdmin",
+        "kind": 6,
+        "importPath": "blogs.admin",
+        "description": "blogs.admin",
+        "peekOfCode": "class BlogAdmin(admin.ModelAdmin):\n    prepopulated_fields = {'slug': ('title',)}\n    list_display = ['id', 'title']\nadmin.site.register(Category)\nadmin.site.register(Blog, BlogAdmin)",
+        "detail": "blogs.admin",
+        "documentation": {}
+    },
+    {
+        "label": "BlogsConfig",
+        "kind": 6,
+        "importPath": "blogs.apps",
+        "description": "blogs.apps",
+        "peekOfCode": "class BlogsConfig(AppConfig):\n    default_auto_field = 'django.db.models.BigAutoField'\n    name = 'blogs'",
+        "detail": "blogs.apps",
+        "documentation": {}
+    },
+    {
+        "label": "Category",
+        "kind": 6,
+        "importPath": "blogs.models",
+        "description": "blogs.models",
+        "peekOfCode": "class Category(models.Model):\n    name = models.CharField(max_length=100)\n    created_at = models.DateTimeField(auto_now_add=True)\n    updated_at = models.DateTimeField(auto_now=True)\n    def __str__(self):\n        return self.name\n    class Meta:\n        verbose_name_plural = 'Categories'\n        verbose_name = 'Category'\n        index_togather = ''",
+        "detail": "blogs.models",
+        "documentation": {}
+    },
+    {
+        "label": "Blog",
+        "kind": 6,
+        "importPath": "blogs.models",
+        "description": "blogs.models",
+        "peekOfCode": "class Blog(models.Model):\n    title = models.CharField(max_length=100)\n    slug = models.SlugField(unique=True, null=False)\n    category = models.ForeignKey(Category, on_delete=models.SET_NULL)\n    author = models.ForeignKey(User, on_delete=models.SET_NULL)\n    featured_image = models.ImageField(upload_to='uploads/%Y/%m/%d')\n    short_description = models.CharField(max_length=200)\n    body = models.TextField(max_length=2000)\n    status = models.IntegerField(choices=STATUS_CHOICES, null=False)\n    is_featured = models.BooleanField(default=False)",
+        "detail": "blogs.models",
+        "documentation": {}
+    },
+    {
+        "label": "STATUS_CHOICES",
+        "kind": 5,
+        "importPath": "blogs.models",
+        "description": "blogs.models",
+        "peekOfCode": "STATUS_CHOICES = (\n    (0, 'Draft')\n)\nclass Blog(models.Model):\n    title = models.CharField(max_length=100)\n    slug = models.SlugField(unique=True, null=False)\n    category = models.ForeignKey(Category, on_delete=models.SET_NULL)\n    author = models.ForeignKey(User, on_delete=models.SET_NULL)\n    featured_image = models.ImageField(upload_to='uploads/%Y/%m/%d')\n    short_description = models.CharField(max_length=200)",
+        "detail": "blogs.models",
         "documentation": {}
     },
     {
@@ -114,7 +239,7 @@
         "kind": 5,
         "importPath": "blog_site.settings",
         "description": "blog_site.settings",
-        "peekOfCode": "ALLOWED_HOSTS = []\n# Application definition\nINSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',\n    'django.contrib.messages',\n    'django.contrib.staticfiles',\n]",
+        "peekOfCode": "ALLOWED_HOSTS = []\n# Application definition\nINSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',\n    'django.contrib.messages',\n    'django.contrib.staticfiles',\n    'blogs'",
         "detail": "blog_site.settings",
         "documentation": {}
     },
@@ -123,7 +248,7 @@
         "kind": 5,
         "importPath": "blog_site.settings",
         "description": "blog_site.settings",
-        "peekOfCode": "INSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',\n    'django.contrib.messages',\n    'django.contrib.staticfiles',\n]\nMIDDLEWARE = [\n    'django.middleware.security.SecurityMiddleware',",
+        "peekOfCode": "INSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',\n    'django.contrib.messages',\n    'django.contrib.staticfiles',\n    'blogs'\n]\nMIDDLEWARE = [",
         "detail": "blog_site.settings",
         "documentation": {}
     },
@@ -204,7 +329,7 @@
         "kind": 5,
         "importPath": "blog_site.settings",
         "description": "blog_site.settings",
-        "peekOfCode": "USE_I18N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/5.0/howto/static-files/\nSTATIC_URL = 'static/'\nSTATIC_ROOT = os.path.join(BASE_DIR, 'static')\nSTATICFILES_DIRS = [\n    'blog_site/static'\n]\n# Default primary key field type",
+        "peekOfCode": "USE_I18N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/5.0/howto/static-files/\nSTATIC_URL = 'static/'\nSTATIC_ROOT = os.path.join(BASE_DIR, 'static')\nSTATICFILES_DIRS = [\n    'blog_site/static'\n]\nMEDIA_URL = 'media'",
         "detail": "blog_site.settings",
         "documentation": {}
     },
@@ -213,7 +338,7 @@
         "kind": 5,
         "importPath": "blog_site.settings",
         "description": "blog_site.settings",
-        "peekOfCode": "USE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/5.0/howto/static-files/\nSTATIC_URL = 'static/'\nSTATIC_ROOT = os.path.join(BASE_DIR, 'static')\nSTATICFILES_DIRS = [\n    'blog_site/static'\n]\n# Default primary key field type\n# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field",
+        "peekOfCode": "USE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/5.0/howto/static-files/\nSTATIC_URL = 'static/'\nSTATIC_ROOT = os.path.join(BASE_DIR, 'static')\nSTATICFILES_DIRS = [\n    'blog_site/static'\n]\nMEDIA_URL = 'media'\nMEDIA_ROOT = os.path.join(BASE_DIR, 'media')",
         "detail": "blog_site.settings",
         "documentation": {}
     },
@@ -222,7 +347,7 @@
         "kind": 5,
         "importPath": "blog_site.settings",
         "description": "blog_site.settings",
-        "peekOfCode": "STATIC_URL = 'static/'\nSTATIC_ROOT = os.path.join(BASE_DIR, 'static')\nSTATICFILES_DIRS = [\n    'blog_site/static'\n]\n# Default primary key field type\n# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
+        "peekOfCode": "STATIC_URL = 'static/'\nSTATIC_ROOT = os.path.join(BASE_DIR, 'static')\nSTATICFILES_DIRS = [\n    'blog_site/static'\n]\nMEDIA_URL = 'media'\nMEDIA_ROOT = os.path.join(BASE_DIR, 'media')\n# Default primary key field type\n# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
         "detail": "blog_site.settings",
         "documentation": {}
     },
@@ -231,7 +356,7 @@
         "kind": 5,
         "importPath": "blog_site.settings",
         "description": "blog_site.settings",
-        "peekOfCode": "STATIC_ROOT = os.path.join(BASE_DIR, 'static')\nSTATICFILES_DIRS = [\n    'blog_site/static'\n]\n# Default primary key field type\n# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
+        "peekOfCode": "STATIC_ROOT = os.path.join(BASE_DIR, 'static')\nSTATICFILES_DIRS = [\n    'blog_site/static'\n]\nMEDIA_URL = 'media'\nMEDIA_ROOT = os.path.join(BASE_DIR, 'media')\n# Default primary key field type\n# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
         "detail": "blog_site.settings",
         "documentation": {}
     },
@@ -240,7 +365,25 @@
         "kind": 5,
         "importPath": "blog_site.settings",
         "description": "blog_site.settings",
-        "peekOfCode": "STATICFILES_DIRS = [\n    'blog_site/static'\n]\n# Default primary key field type\n# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
+        "peekOfCode": "STATICFILES_DIRS = [\n    'blog_site/static'\n]\nMEDIA_URL = 'media'\nMEDIA_ROOT = os.path.join(BASE_DIR, 'media')\n# Default primary key field type\n# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
+        "detail": "blog_site.settings",
+        "documentation": {}
+    },
+    {
+        "label": "MEDIA_URL",
+        "kind": 5,
+        "importPath": "blog_site.settings",
+        "description": "blog_site.settings",
+        "peekOfCode": "MEDIA_URL = 'media'\nMEDIA_ROOT = os.path.join(BASE_DIR, 'media')\n# Default primary key field type\n# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
+        "detail": "blog_site.settings",
+        "documentation": {}
+    },
+    {
+        "label": "MEDIA_ROOT",
+        "kind": 5,
+        "importPath": "blog_site.settings",
+        "description": "blog_site.settings",
+        "peekOfCode": "MEDIA_ROOT = os.path.join(BASE_DIR, 'media')\n# Default primary key field type\n# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
         "detail": "blog_site.settings",
         "documentation": {}
     },
@@ -258,7 +401,7 @@
         "kind": 5,
         "importPath": "blog_site.urls",
         "description": "blog_site.urls",
-        "peekOfCode": "urlpatterns = [\n    path('admin/', admin.site.urls),\n    path('', home, name='home')\n]",
+        "peekOfCode": "urlpatterns = [\n    path('admin/', admin.site.urls),\n    path('', home, name='home')\n] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)",
         "detail": "blog_site.urls",
         "documentation": {}
     },
