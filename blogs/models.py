@@ -17,7 +17,7 @@ class Category(models.Model):
 
 STATUS_CHOICES = (
     (0, 'Draft'),
-    (1, 'Good')
+    (1, 'Published')
 )
 
 class Blog(models.Model):
@@ -32,3 +32,6 @@ class Blog(models.Model):
     is_featured = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)    
+
+    def __str__(self) -> str:
+        return self.title
