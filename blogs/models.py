@@ -13,7 +13,7 @@ class Category(models.Model):
     class Meta:
         verbose_name_plural = 'Categories'
         verbose_name = 'Category'
-        index_togather = ''
+        index_together = ''
 
 STATUS_CHOICES = (
     (0, 'Draft')
