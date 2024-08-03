@@ -1,0 +1,36 @@
+{% block content %}
+
+{% load static %}
+
+
+
+
+    <h2 class="text-uppercase text-warning">Posts related to {{category.name}}</h2>
+    {% if posts %}
+    <main role="main" class="container p-0">
+      <div class="row">
+        <div class="col-md-10 blog-main">
+          {% for post in posts %}
+
+          <div class="card border-0">
+            <div class="card-body">
+              <h3>{{post.title}}</h3>
+              <small class="mb-1 text-muted">{{post.created_at}} | {{post.author}}</small>
+              <p class="card-text">{{post.short_description | truncatewords:20}}</p>
+            </div>
+          </div>
+
+          {% endfor %}
+
+        </div>
+        <!-- /.blog-main -->
+
+
+      </div><!-- /.row -->
+
+    </main><!-- /.container -->
+    {% else %}
+    <p>No contents found</p>
+    {% endif %}
+
+{% endblock %}
