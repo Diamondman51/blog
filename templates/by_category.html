@@ -1,0 +1,48 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+
+<div class="badge bg-primary text-light">{{single}}</div>
+  <main role="main" class="container p-0" style="text-decoration: none;">
+  <a class="badge bg-primary text-decoration-none text-light" href="#!">{{single.category.name}}</a>
+    <p class='badge bg-secondary'>{{categor.category.name}}</p>
+    <div class="row">
+      <div class="col-md-8 blog-main">
+        {% for cat in categor %}
+
+        <div class="blog-post" style="text-decoration: none;">
+          <a href="{% url 'blog' cat.id %}"> 
+          <h2 class="blog-post-title" style="text-decoration: none; color: rgb(0, 0, 0)">{{cat.title}}</h2>
+          <p class="blog-post-meta" style="text-decoration: none;">{{cat.created_at|timesince}} by <a href="#" style="text-decoration: none;">{{cat.author}}</a></p>
+
+          <p><a href="{% url 'blog' cat.id %}" style="text-decoration: none; color: black">{{cat.short_description}}</a></p>            
+          </a>
+
+          
+        </div>
+        <!-- /.blog-post -->
+
+        {% endfor %}
+      </div>
+
+      <!-- /.blog-main -->
+
+      <aside class="col-md-4 blog-sidebar">
+        <div class="p-3 mb-3 bg-light rounded">
+          <h4 class="font-italic">About</h4>
+          <p class="mb-0">Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+        </div>
+
+        <div class="p-3">
+          <h4 class="font-italic">Follow Us</h4>
+          <ol class="list-unstyled">
+            <li><a href="#">GitHub</a></li>
+            <li><a href="#">LinkedIn</a></li>
+          </ol>
+        </div>
+      </aside><!-- /.blog-sidebar -->
+
+    </div><!-- /.row -->
+
+  </main><!-- /.container -->
+{% endblock %}

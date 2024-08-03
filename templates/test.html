@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <title>Page Title</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <style>
+    .media {
+      position: relative;
+      overflow: hidden;
+      display: inline-block;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+      width: 100%;
+      height: 500px;
+    }
+
+    .media::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to top, black);
+      z-index: 0; /* Ensure the gradient is above the image but below the text */
+      pointer-events: none; /* Allow clicking through the gradient */
+    }
+
+    .media img {
+      display: block;
+      width: 100%;
+      height: 100%; /* Ensure image covers the container */
+      object-fit: cover; /* Cover the container without distorting */
+      transition: transform 1s;
+      background: linear-gradient(to top, black, transparent);
+    }
+
+    .media:hover img {
+      transform: scale(1.03);
+    }
+
+    .overlay {
+      position: absolute;
+      left: 10px;
+      bottom: 10px;
+      color: white;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 10px;
+      border-radius: 5px;
+      z-index: 1; /* Ensure the text is above the gradient */
+    }
+  </style>
+</head>
+<body>
+  <div class="media">
+    <a href="{% url 'blog' blog.id %}">
+      <img src="../blog/static/images/cricket.jpg" alt="">
+      <div class="overlay">
+        <h1>{{blog.title}}</h1>
+        {{blog.short_description}}
+      </div>
+    </a>
+  </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <title>Example</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <style>
+    .media {
+      position: relative;
+      overflow: hidden;
+      display: inline-block;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+      width: 100%;
+      height: 500px;
+    }
+
+    .media img {
+      display: block;
+      width: 100%;
+      height: 100%; /* Ensure image covers the container */
+      object-fit: cover; /* Cover the container without distorting */
+      transition: transform 1s;
+    }
+
+    .media:hover img {
+      transform: scale(1.03);
+    }
+
+    .media::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: linear-gradient(to top, rgba(0, 0, 0), transparent);
+      opacity: 0;
+      transition:  2s;
+      z-index: 1; /* Ensure the gradient is above the image but below the text */
+    }
+
+    .media:hover::before {
+      opacity: 0.3;
+    }
+
+    .overlay {
+      position: absolute;
+      left: 10px;
+      bottom: 10px;
+      color: white;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 10px;
+      border-radius: 5px;
+      z-index: 2; /* Ensure the text is above the gradient */
+    }
+  </style>
+</head>
+<body>
+  <div class="media">
+    <a href="#">
+      <img src="https://via.placeholder.com/500" alt="">
+      <div class="overlay">
+        <h1>Example Title</h1>
+        Short description goes here.
+      </div>
+    </a>
+  </div>
+</body>
+</html>
+
+
+
+ -->
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <title>Example</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <style>
+    .media {
+      position: relative;
+      overflow: hidden;
+      display: inline-block;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+      width: 100%;
+      height: 500px;
+    }
+
+    .media img {
+      display: block;
+      width: 100%;
+      height: 100%; /* Ensure image covers the container */
+      object-fit: cover; /* Cover the container without distorting */
+      transition: transform 1s;
+    }
+
+    .media:hover img {
+      transform: scale(1.03);
+    }
+
+    .media::before {
+      content: '';
+      position: absolute;
+      bottom: 0; /* Adjust top position to control vertical size */
+      left: 0; /* Adjust left position to control horizontal size */
+      width: 100%; /* Adjust width to control horizontal size */
+      height: 50%; /* Adjust height to control vertical size */
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+      opacity: 0;
+      transition: opacity 0.5s;
+      z-index: 1; /* Ensure the gradient is above the image but below the text */
+    }
+
+    .media:hover::before {
+      opacity: 1;
+    }
+
+    .overlay {
+      position: absolute;
+      left: 10px;
+      bottom: 10px;
+      color: white;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 10px;
+      border-radius: 5px;
+      z-index: 2; /* Ensure the text is above the gradient */
+    }
+  </style>
+</head>
+<body>
+  <div class="media">
+    <a href="#">
+      <img src="https://via.placeholder.com/500" alt="">
+      <div class="overlay">
+        <h1>Example Title</h1>
+        Short description goes here.
+      </div>
+    </a>
+  </div>
+  <div class="m">
+  <blockquote>
+    style="text-decoration: none; color: black"
+  </blockquote>
+  </div>
+</body>
+</html>

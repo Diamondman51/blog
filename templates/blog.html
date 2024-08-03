@@ -1,0 +1,64 @@
+{% extends 'header.html' %} {% load static %} {% block content %}
+<style>
+  .image {
+    height: 1000px;
+    width: auto;
+    overflow: hidden;
+    margin: 20px 0 20px 0;
+  }
+
+  img {
+    width: 100%;
+    display: block;
+  }
+</style>
+<a class="badge bg-primary text-decoration-none text-light" href="{% url 'posts_by_category' categor.id %}">{{categor.name}}</a>
+<main role="main" class="container p-0">
+  <div class="row">
+    <div class="col-md-8 blog-main">
+      <div class="blog-post">
+        <h2 class="blog-post-title">{{blog.title}}</h2>
+        <p class="blog-post-meta">{{blog.created_at}}</p>
+        <p>{{blog.short_description}}</p>
+        <div class="image">
+          <img
+            class="img-fluid rounded"
+            src="{{blog.featured_image.url}}"
+            alt=""
+          />
+        </div>
+        <blockquote style="border-left: 2px solid rgb(89, 165, 189); padding-left: 15px;">
+          {{blog.words}}
+        </blockquote>
+        {% for par in paragraph %}
+        <p>{{par}}</p>
+        {% endfor %}
+      </div>
+      <!-- /.blog-post -->
+    </div>
+    <!-- /.blog-main -->
+
+    <aside class="col-md-4 blog-sidebar">
+      <div class="p-3 mb-3 bg-light rounded">
+        <h4 class="font-italic">About</h4>
+        <p class="mb-0">
+          Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis
+          consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla
+          sed consectetur.
+        </p>
+      </div>
+
+      <div class="p-3">
+        <h4 class="font-italic">Follow Us</h4>
+        <ol class="list-unstyled">
+          <li><a href="#">GitHub</a></li>
+          <li><a href="#">LinkedIn</a></li>
+        </ol>
+      </div>
+    </aside>
+    <!-- /.blog-sidebar -->
+  </div>
+  <!-- /.row -->
+</main>
+<!-- /.container -->
+{% endblock %}
