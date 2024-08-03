@@ -1,5 +1,4 @@
 from django.contrib import admin
-<<<<<<< HEAD
 
 from blogs.models import *
 
@@ -21,14 +20,3 @@ class CategoryAdmin(admin.ModelAdmin):
 
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Blog, BlogAdmin)
-=======
-from .models import *
-
-# Register your models here.
-class BlogAdmin(admin.ModelAdmin):
-    prepopulated_fields = {'slug': ('title',)}
-    list_display = ['id', 'title', 'is_featured']
-
-admin.site.register(Category)
-admin.site.register(Blog, BlogAdmin)
->>>>>>> f0cc347699b1c2398f36bf1b520b8bda7fbe31ae
