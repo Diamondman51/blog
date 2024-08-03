@@ -1,7 +1,7 @@
 {% extends 'header.html' %} {% load static %} {% block content %}
 <style>
   .image {
-    height: 1000px;
+    height: auto;
     width: auto;
     overflow: hidden;
     margin: 20px 0 20px 0;
@@ -18,7 +18,7 @@
     <div class="col-md-8 blog-main">
       <div class="blog-post">
         <h2 class="blog-post-title">{{blog.title}}</h2>
-        <p class="blog-post-meta">{{blog.created_at}}</p>
+        <p class="blog-post-meta">{{blog.created_at|timesince}}</p>
         <p>{{blog.short_description}}</p>
         <div class="image">
           <img
@@ -27,9 +27,11 @@
             alt=""
           />
         </div>
-        <blockquote style="border-left: 2px solid rgb(89, 165, 189); padding-left: 15px;">
+        {% if blog.words %}
+        <blockquote style="border-left: 2px solid rgb(89, 165, 189); padding-left: 15px; background-color: aliceblue; border-radius: 5px; padding: 10px">
           {{blog.words}}
         </blockquote>
+        {% endif %}
         {% for par in paragraph %}
         <p>{{par}}</p>
         {% endfor %}

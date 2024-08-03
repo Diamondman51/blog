@@ -17,11 +17,12 @@
           <div class="col-3 pt-1">
             <a class="blog-header-logo text-dark" href="/">Django Blog</a>
           </div>
-          <form action="" class="col-md-6" method="get">
+          <form action="{% url 'search' %}" class="col-md-6" method="get">
+            
               <div class="">
                   <div class="input-group">
-                      <input class="form-control" type="text" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search" />
-                      <button class="btn btn-primary" id="button-search" type="button">Go!</button>
+                      <input class="form-control" type="text" name="keyword" placeholder="Enter search term..." value="{{keyword}}" aria-label="Enter search term..." aria-describedby="button-search" />
+                      <button type="submit" class="btn btn-primary" id="button-search">Go!</button>
                   </div>
               </div>
           </form>
@@ -44,7 +45,7 @@
     {% endblock %}
     </div>
 <footer class="blog-footer">
-  <p>Django blog built with � by <a href="#">Rathan Kumar</a></p>
+  <p>Django blog built with � by <a href="#">Shavkatov Javakhir</a></p>
 </footer>
 </body>
 </html>

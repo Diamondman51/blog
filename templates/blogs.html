@@ -71,13 +71,13 @@
       <div class="card border-0" >
         <div class="card-body">
           <a href="{{blog.id}}" class="text-dark font-weight-bold" style="text-decoration: double;"><h3>{{blog.title}}</h3></a>
-          <small class="mb-1 text-muted">{{blog.created_at|timesincex`}}</small>
+          <small class="mb-1 text-muted">{{blog.created_at|timesince}}</small>
           <p class="card-text">{{blog.short_description}}</p>
         </div>
       </div>
     </div>
     {% endfor %}
-  </div>
+</div>
 
   <main role="main" class="container p-0">
     <div class="row">

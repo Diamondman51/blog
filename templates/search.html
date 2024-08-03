@@ -1,13 +1,13 @@
 {% extends 'header.html' %}
 {% load static %}
 {% block content %}
-<h4 class="text-warning" style="display: inline-block;">Posts related to </h4>
-<div class="text-warning" style="display: inline-block;"><h4>{{single}}</h4></div>
+{% if result %}
   <main role="main" class="container p-0" style="text-decoration: none;">
-  <div class="row">
-      <div class="col-md-8 blog-main">
-        {% for cat in categor %}
 
+    <div class="row">
+      <div class="col-md-8 blog-main">
+        {% for cat in result %}
+        <a href="{% url 'posts_by_category' cat.category.id %}" class="badge bg-primary text-light">{{cat.category}}</a>
         <div class="blog-post" style="text-decoration: none;">
           <a href="{% url 'blog' cat.id %}"> 
           <h2 class="blog-post-title" style="text-decoration: none; color: rgb(0, 0, 0)">{{cat.title}}</h2>
@@ -43,4 +43,8 @@
     </div><!-- /.row -->
 
   </main><!-- /.container -->
+  {% else %}
+  <h4 style="padding: 10px 0 10px">No contents found</h4>
+  {% endif %}
+  <p><b>The number of blogs: {{num}}</b></p>
 {% endblock %}

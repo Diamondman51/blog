@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.shortcuts import get_object_or_404, render
 
 from blogs.models import Blog, Category
@@ -34,4 +35,21 @@ def posts_by_category(request, category_id):
     }
     return render(request, "by_category.html", context=context)
 
-# def search(request, search_term):
+def search(request):
+
+
+# Construct the regex pattern with word boundaries
+    keyword = (request.GET.get("keyword", ""))
+    # pattern = rf'\b{keyword}\b'
+    # data = Blog.objects.filter(Q(title__iregex=pattern) & Q(short_description__iregex=pattern))
+    data = Blog.objects.filter(Q(title__icontains=keyword) & Q(short_description__icontains=keyword))
+    num = data.count()
+
+    print("sssssssssssssssssssssssssssssssssssssssssssssssssssss")
+    print(data)
+    context = {
+        'result': data,
+        'num': num,
+        'keyword': keyword
+    }
+    return render(request, "search.html", context)

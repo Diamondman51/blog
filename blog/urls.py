@@ -19,8 +19,11 @@ from django.contrib import admin
 from django.urls import include, path
 from django.conf.urls.static import static
 
+from blogs.views import search
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", include("blogs.urls")),
-    path("", include("settingsapp.urls"))
+    path("", include("settingsapp.urls")),
+    # path('search', search, name="search"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
