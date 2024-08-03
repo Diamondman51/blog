@@ -19,11 +19,13 @@ from django.contrib import admin
 from django.urls import include, path
 from django.conf.urls.static import static
 
-from blogs.views import search
+from blogs.views import register, login, logout
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("", include("blogs.urls")),
-    path("", include("settingsapp.urls")),
-    # path('search', search, name="search"),
+    path("blogs/", include("blogs.urls")),
+    path("settings/", include("settingsapp.urls")),
+    path('register/', register, name="register"),
+    path("login/", login, name="login"),
+    path('logout', logout, name="logout"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

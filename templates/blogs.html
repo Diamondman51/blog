@@ -31,7 +31,7 @@
     bottom: 0;
     height: 50%;
     width: 100%;
-    opacity: .4;
+    opacity: 0.4;
     background: linear-gradient(to top, rgb(0, 0, 0), transparent);
     transition: opacity 1s;
     z-index: 1;
@@ -51,6 +51,7 @@
     border-radius: 5px;
     margin-right: 10px;
     z-index: 2;
+    cursor: pointer;
   }
 </style>
 <div class="media">
@@ -70,7 +71,7 @@
     <div class="col-md-6">
       <div class="card border-0" >
         <div class="card-body">
-          <a href="{{blog.id}}" class="text-dark font-weight-bold" style="text-decoration: double;"><h3>{{blog.title}}</h3></a>
+          <a href="{% url 'blog' blog.id %}" class="text-dark font-weight-bold" style="text-decoration: double;"><h3>{{blog.title}}</h3></a>
           <small class="mb-1 text-muted">{{blog.created_at|timesince}}</small>
           <p class="card-text">{{blog.short_description}}</p>
         </div>

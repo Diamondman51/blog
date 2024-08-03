@@ -9,8 +9,8 @@
         {% for cat in categor %}
 
         <div class="blog-post" style="text-decoration: none;">
-          <a href="{% url 'blog' cat.id %}"> 
-          <h2 class="blog-post-title" style="text-decoration: none; color: rgb(0, 0, 0)">{{cat.title}}</h2>
+          <a href="{% url 'blog' cat.id %}" style="text-decoration: none;"> 
+          <h2 class="blog-post-title" style="color: rgb(0, 0, 0)">{{cat.title}}</h2>
           <p class="blog-post-meta" style="text-decoration: none;">{{cat.created_at|timesince}} by <a href="#" style="text-decoration: none;">{{cat.author}}</a></p>
 
           <p><a href="{% url 'blog' cat.id %}" style="text-decoration: none; color: black">{{cat.short_description}}</a></p>            
