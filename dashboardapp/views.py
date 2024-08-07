@@ -7,6 +7,7 @@ from blog.forms import RegistrationForm
 from blogs.models import Blog
 from dashboardapp.forms import *
 from django.utils.text import slugify
+from .forms import EditUserForm
 
 
 # Create your views here.
@@ -72,6 +73,7 @@ def dashboard_blogs(request):
     return render(request, "dashboard_blogs.html", context)
 
 
+@login_required(login_url='login')
 def add_blog(request):
     if request.method == "POST":
         form = BlogForm(request.POST, request.FILES)
@@ -96,11 +98,14 @@ def add_blog(request):
         return render(request, 'add_blog.html', context)
 
 
+@login_required(login_url='login')
 def delete_blog(request, pk):
     blog = get_object_or_404(Blog, pk=pk)
     blog.delete()
     return redirect("dashboard_blogs")
  
+
+@login_required(login_url='login')
 def edit_blog(request, pk):
     blog = get_object_or_404(Blog, pk=pk)
     if request.method == 'POST':
@@ -121,6 +126,7 @@ def edit_blog(request, pk):
         return render(request, "edit_blog.html", context)
     
 
+@login_required(login_url='login')
 def users(request):
     users = User.objects.exclude(username='admin')
     context = {
@@ -129,6 +135,7 @@ def users(request):
     return render(request, 'users.html', context)
 
 
+@login_required(login_url='login')
 def add_user(request):
     if request.method == "POST":
         form = RegistrationForm(request.POST)
@@ -143,23 +150,27 @@ def add_user(request):
         return render(request, "add_user.html", context)
 
 
+@login_required(login_url='login')
 def delete_user(request, pk):
     user = get_object_or_404(User, pk=pk)
     user.delete()
     return redirect("users")
 
 
+@login_required(login_url='login')
 def edit_user(request, pk):
     user = User.objects.get(pk=pk)
     if request.method == "POST":
-        form = RegistrationForm(request.POST, instance=user)
+        form = EditUserForm(request.POST, instance=user)
         if form.is_valid():
             form.save()
+            return redirect('users')
         else:
             print("------------------------------------------------------")
-            return redirect("edit_user")
+            print(form.errors)
+            return redirect("edit_user", pk=pk)
     elif request.method == "GET":
-        form = RegistrationForm(instance=user)
+        form = EditUserForm(instance=user)
         context = {
             'form': form,
             'user': user,
