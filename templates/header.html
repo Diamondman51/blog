@@ -9,6 +9,7 @@
     <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
     <link href="{% static 'css/blog.css' %}" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/aa9c6364b5.js" crossorigin="anonymous"></script>
   </head>
 <body>
     <div class="container">
@@ -30,7 +31,7 @@
           </form>
           <div class="col-3 d-flex justify-content-end align-items-center">
             {% if user.is_authenticated %}
-            {{user}}&nbsp;|&nbsp;<span><a href="{% url 'logout' %}" class="btn btn-outline-warning text-dark" style="text-decoration: none;">Logout</a></span>
+            {{user}}&nbsp;|&nbsp;<span><a href="{% url 'dashboard' %}" class="btn btn-outline-warning text-dark" style="text-decoration: none;">Dashboard</a>&nbsp</span><a class="btn btn-outline-primary" href="{% url 'logout' %}">Logout</a>
             {% else %}
             <a class="btn btn-sm btn-warning" href="{% url 'login' %}">Login</a> &nbsp;
             <a class="btn btn-sm btn-outline-secondary" href="{% url 'register' %}">Register</a>
@@ -41,10 +42,12 @@
 
       <div class="nav-scroller py-1 mb-2">
         <nav class="nav d-flex justify-content-between">
+          {% if user.is_authenticated %}
           {% for category in categories %}
           <a class="p-2 text-muted" href="{% url 'posts_by_category' category.id %}">{{category.name}}</a>
           <a href=""></a>
           {% endfor %}
+          {% endif %}
         </nav>
       </div>
     {% block content %}

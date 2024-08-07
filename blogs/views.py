@@ -1,25 +1,27 @@
 from blog.forms import RegistrationForm
-from blogs import context
 from blogs.models import Blog, Category
 from django.contrib import auth
 from django.contrib.auth.forms import AuthenticationForm
 from django.db.models import Q
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import redirect, render
+
+from settingsapp.models import About, Social_links
 
 
 # Create your views here.
-
+# @login_required(login_url='login')
 def blogs(request):
     blog = Blog.objects.filter(status=1)
     featured = blog.filter(is_featured=True)
     context = {
         'blogs': blog,
-        'featured': featured
+        'featured': featured,
     }
 
     return render(request, 'blogs.html', context)
 
 
+# @login_required(login_url='login')
 def blog(request, blog_id):
     blog = Blog.objects.get(id=blog_id)
     category = blog.category
@@ -27,17 +29,18 @@ def blog(request, blog_id):
     context = {
         'blog': blog,
         "paragraph": paragraph,
-        'categor': category
+        'categor': category,
     }
     return render(request, "blog.html", context)
 
 
+# @login_required(login_url='login')
 def posts_by_category(request, category_id):
     data = Blog.objects.filter(category=category_id)
     single_cat = Category.objects.get(id=category_id)
     context = {
         'categor': data,
-        "single": single_cat
+        "single": single_cat,
     }
     return render(request, "by_category.html", context=context)
 
@@ -67,10 +70,6 @@ def register(request):
         if form.is_valid():
             form.save()
             return redirect("login")
-        else:
-            print("gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg")
-            print(form.errors)
-            return redirect("register")
     else:
         form = RegistrationForm()
         context = {
@@ -89,6 +88,10 @@ def login(request):
             if user is not None:
                 auth.login(request, user)
                 return redirect('blogs')
+        else:
+            print('*****************************************************************************************************')
+            print(request.errors)
+            return redirect('login')
     else:
         form = AuthenticationForm()
         context = {
@@ -97,6 +100,7 @@ def login(request):
 
         return render(request, "login.html", context)
 
+
 def logout(request):
     auth.logout(request)
-    return redirect("login")
+    return redirect("blogs")
