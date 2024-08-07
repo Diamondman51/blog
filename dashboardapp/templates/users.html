@@ -1,0 +1,47 @@
+{% extends 'header.html' %} {% block content %}
+<div class="row">
+    <div class="col-3">
+        <h2>Users</h2>
+    </div>
+    <div class="col-9 text-right">
+        <a href="{% url 'add_user' %}" class="btn btn-primary">Add user</a>
+    </div>
+</div>
+<div class="row my-3">
+    {% include 'left_side.html' %}
+<div class="col-9">
+  <table class="table table-hover table-dark" style="border-radius: 0 0 15px 15px;">
+    <thead>
+      <tr>
+        <th scope="col">№</th>
+        <th scope="col">Username</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Email <i class="fa-regular fa-envelope"></i></th>
+        <th scope="col">Actions <i class="text-warning fa-solid fa-bullseye"></i></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in users %}
+      <tr>
+        <th scope="row">{{forloop.counter}}</th>
+        <td>{{user}}</td>
+        <td>{{user.first_name}}</td>
+        <td>{{user.last_name}}</td>
+        <td>{{user.email|truncatechars:10}}</td>
+        <td>
+            <a href="{% url 'edit_user' user.id %}" class="text-success px-2 bg-light" style="border-radius: 5px;"
+              ><i class="fa-regular fa-pen-to-square"></i></a
+            >&nbsp;&nbsp;
+            <a href="{% url 'delete_user' user.id %}" class="text-danger px-2 bg-light" style="border-radius: 5px;"
+              ><i class="fa-solid fa-trash-can"></i>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+</div>
+
+{% endblock %}
