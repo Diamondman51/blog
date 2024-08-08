@@ -18,7 +18,7 @@
         <th scope="col">First Name</th>
         <th scope="col">Last Name</th>
         <th scope="col">Email <i class="fa-regular fa-envelope"></i></th>
-        <th scope="col">Actions <i class="text-warning fa-solid fa-bullseye"></i></th>
+        <th scope="col" class="text-center">Actions <i class="text-warning fa-solid fa-bullseye"></i></th>
       </tr>
     </thead>
     <tbody>
@@ -29,7 +29,7 @@
         <td>{{user.first_name}}</td>
         <td>{{user.last_name}}</td>
         <td>{{user.email|truncatechars:10}}</td>
-        <td>
+        <td class="text-center">
             <a href="{% url 'edit_user' user.id %}" class="text-success px-2 bg-light" style="border-radius: 5px;"
               ><i class="fa-regular fa-pen-to-square"></i></a
             >&nbsp;&nbsp;

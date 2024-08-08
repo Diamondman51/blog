@@ -37,7 +37,7 @@ class EditUserForm(UserChangeForm):
 
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'email', 'password')
+        fields = ('username', 'first_name', 'last_name', 'email',)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -56,6 +56,8 @@ class EditUserForm(UserChangeForm):
         cleaned_data = super().clean()
         password = cleaned_data.get("password")
         password2 = cleaned_data.get("password2")
+        print('4444444444444444444444444444444444444444444444444444444444444444444444444')
+        print(cleaned_data)
 
         if password and password2 and password != password2:
             raise forms.ValidationError("Passwords do not match.")
@@ -63,7 +65,8 @@ class EditUserForm(UserChangeForm):
     def save(self, commit=True):
         user = super().save(commit=False) 
         if self.cleaned_data['password']:
-            user.set_password(self.cleaned_data['password'])  # Hash the password
+            user.set_password(self.cleaned_data['password2'])  # Hash the password
         if commit:
             user.save()
         return user
+    
