@@ -1,81 +1,22 @@
 {% extends 'header.html' %}
 {% load static %}
 {% block content %}
-{% for blog in featured %}
-{% if forloop.last %}
-<style>
-  .media {
-    position: relative;
-    overflow: hidden;
-    display: inline-block;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-    width: 50%;
-    height: 400px;
-    align-items: center;
-    justify-content: center;
-  }
-  .media img {
-    display: block;
-    position: absolute;
-    transition: transform 1s;
-    object-fit: cover;
-    top: -30%;
-  }
-  .media:hover img{
-    transform: scale(1.03);
-  }
 
-  .media::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    height: 50%;
-    width: 100%;
-    opacity: 0.4;
-    background: linear-gradient(to top, rgb(0, 0, 0), transparent);
-    transition: opacity 1s;
-    z-index: 1;
-    cursor: pointer;
-  }
-
-  .media:hover::before {
-    opacity: 0.8;
-    cursor: pointer;
-  }
-
-  .overlay {
-    position: absolute;
-    left: 10px;
-    bottom: 10px;
-    color: white;
-    background: rgba(0, 0, 0, 0);
-    padding: 10px;
-    border-radius: 5px;
-    margin-right: 10px;
-    z-index: 2;
-    cursor: pointer;
-  }
-</style>
-<div class="jumbotron">
-  <a href="{% url 'blog' blog.id %}">
-    <img src="{{blog.featured_image.url}}" alt="">
-    <div class="overlay">
-      <h1>{{blog.title}}</h1>
-    </div>
-  </a>
+<a href="{% url 'blog' random_blog.slug %}" style="text-decoration: none;">
+  <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark" style="background-image: url({{random_blog.featured_image.url}});background-blend-mode: overlay;background-size: 100% 100%;">
+  <div class="col-md-6 px-0">
+      <h1 class="display-4 font-italic">{{random_blog.title}}</h1>
+      <p>{{random_blog.short_description|truncatewords:20}}</p>
+  </div>
 </div>
-
-{% endif %}
-{% endfor %}
+</a>
 
 <div class="row mb-2">
     {% for blog in blogs %}
     <div class="col-md-6">
       <div class="card border-0" >
         <div class="card-body">
-          <a href="{% url 'blog' blog.id %}" class="text-dark font-weight-bold" style="text-decoration: double;"><h3>{{blog.title}}</h3></a>
+          <a href="{% url 'blog' blog.slug %}" class="text-dark font-weight-bold" style="text-decoration: double;"><h3>{{blog.title}}</h3></a>
           <small class="mb-1 text-muted">{{blog.created_at|timesince}}</small>
           <p class="card-text">{{blog.short_description|truncatechars:200}}</p>
         </div>

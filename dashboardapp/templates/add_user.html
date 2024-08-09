@@ -1,5 +1,5 @@
 {% extends 'header.html' %} {% block content %} {% load crispy_forms_tags %}
-
+{% if perms.auth.add_user %}
 <div class="row">
   <div class="col-3">
     <h2>Users</h2>
@@ -12,7 +12,7 @@
 
   <div class="col-9">
     <h3 class="text-center">Add user</h3>
-    <form class="text-left" action="{% url 'add_user' %}" method="post" style="height: auto; width: 600px; margin: auto; padding: 30px 0">
+    <form class="text-left" action="" method="post" style="height: auto; width: 600px; margin: auto; padding: 30px 0">
         {% csrf_token %}
         {{form|crispy}}
         <div class="text-right">
@@ -21,5 +21,7 @@
     </form>
 </div>
 </div>
-
+{% else %}
+<h4>You do not have special permissions</h4>
+{% endif %}
 {% endblock %}

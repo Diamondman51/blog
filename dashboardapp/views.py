@@ -1,13 +1,12 @@
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 
-from blog.forms import RegistrationForm
 from blogs.models import Blog
 from dashboardapp.forms import *
 from django.utils.text import slugify
-from .forms import EditUserForm
+from .forms import EditUserForm, AddUserForm
 
 
 # Create your views here.
@@ -129,6 +128,7 @@ def edit_blog(request, pk):
 @login_required(login_url='login')
 def users(request):
     users = User.objects.exclude(username='admin')
+    # group = user.groups.exclude(username="admin")
     context = {
         'users': users,
     }
@@ -138,12 +138,15 @@ def users(request):
 @login_required(login_url='login')
 def add_user(request):
     if request.method == "POST":
-        form = RegistrationForm(request.POST)
+        form = AddUserForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('users')
+        else:
+            print('llllllllllllllllllllllllllllllllllllllllllllllllllllllllll')
+            print(form.errors)
     elif request.method == 'GET':
-        form = RegistrationForm()
+        form = AddUserForm()
         context = {
             'form': form,
         }
@@ -151,6 +154,7 @@ def add_user(request):
 
 
 @login_required(login_url='login')
+@permission_required("auth.delete_user", raise_exception=True)
 def delete_user(request, pk):
     user = get_object_or_404(User, pk=pk)
     user.delete()

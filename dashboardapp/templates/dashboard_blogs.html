@@ -35,7 +35,7 @@
           <td>{{blog.category}}</td>
           <td>{{blog.author}}</td>
           <td>{% if blog.status == 1 %} <i class="text-success fa-solid fa-star" style="border-radius: 5px; padding: 5px;"></i> {% else %} <i class="text-danger fa-regular fa-star" style="border-radius: 5px; padding: 5px;"></i>{% endif %}</td>
-          <td>{% if blog.is_featured == True %}<i class="text-primary fa-regular fa-square-check" style="border-radius: 5px; padding: 5px;"></i>{% else %}<i class="text-danger fa-regular fa-circle-xmark" style="border-radius: 5px; padding: 5px;"></i>{% endif %}</td>
+          <td>{% if blog.is_featured == True %} <i class="text-primary fa-regular fa-square-check" style="border-radius: 5px; padding: 5px;"></i>{% else %}<i class="text-danger fa-regular fa-circle-xmark" style="border-radius: 5px; padding: 5px;"></i>{% endif %}</td>
           <td>{{blog.created_at|date:'d.m.Y H:i:s'}}</td>
           <td>
             <a href="{% url 'edit_blog' blog.id %}" class="text-success bg-light p-1 px-2" style="border-radius: 5px; padding: 5px;"

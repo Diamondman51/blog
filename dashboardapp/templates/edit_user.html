@@ -1,5 +1,5 @@
 {% extends 'header.html' %} {% block content %} {% load crispy_forms_tags %}
-
+{% if perms.auth.change_user %}
 <div class="row">
   <div class="col-3">
     <h2>Users</h2>
@@ -21,5 +21,7 @@
     </form>
 </div>
 </div>
-
+{% else %}
+<h4>You do not have special permissions</h4>
+{% endif %}
 {% endblock %}

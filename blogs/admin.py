@@ -18,5 +18,14 @@ class CategoryAdmin(admin.ModelAdmin):
     search_fields = ("id", "name", "created_at", "updated_at")
 
 
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ("id", "user", "blog", "text", "created_at",)
+    ordering = ["id"]
+    search_fields = ("id", "user", "text", "created_at")
+    sortable_by= ("id", "user", "blog" , "created_at")
+    list_editable= ("user", "blog", "text")
+
+
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Blog, BlogAdmin)
+admin.site.register(Comment, CommentAdmin)
