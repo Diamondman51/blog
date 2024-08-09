@@ -3,6 +3,8 @@
       <a class="nav-link text-dark {% if '/dashboard/' == request.path %} bg-warning {% endif %}" href="{% url 'dashboard' %}">Dashboard</a>
       <a class="nav-link text-dark {% if '/dashboard/categories/' == request.path or '/dashboard/categories/add/' == request.path %} bg-warning {% endif %}" href="{% url 'categories' %}">Categories</a>
       <a class="nav-link text-dark {% if '/dashboard/blogs/' == request.path or '/dashboard/blogs/add/' == request.path %} bg-warning {% endif %}" href="{% url 'dashboard_blogs' %}">Blogs</a>
-      <a class="nav-link text-dark {% if '/dashboard/users/' == request.path or '/dashboard/users/add/' == request.path %} bg-warning {% endif %}" href="{% url 'users' %}">Users</a>
+      {% if perms.auth.view_user %}
+      <a class="nav-link text-dark {% if '/dashboard/users/' == request.path or '/dashboard/users/add/' == request.path or '/dashboard/users/edit/' in request.path %} bg-warning {% endif %}" href="{% url 'users' %}">Users</a>
+      {% endif %}
     </nav>
   </div>

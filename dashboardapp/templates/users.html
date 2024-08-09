@@ -1,4 +1,5 @@
 {% extends 'header.html' %} {% block content %}
+{% if perms.auth.view_user %}
 <div class="row">
     <div class="col-3">
         <h2>Users</h2>
@@ -11,13 +12,16 @@
     {% include 'left_side.html' %}
 <div class="col-9">
   <table class="table table-hover table-dark" style="border-radius: 0 0 15px 15px;">
-    <thead>
+    <thead class="text-center">
       <tr>
         <th scope="col">№</th>
+        <th scope="col">Fullname</th>
         <th scope="col">Username</th>
-        <th scope="col">First Name</th>
-        <th scope="col">Last Name</th>
         <th scope="col">Email <i class="fa-regular fa-envelope"></i></th>
+        <th scope="col">Position</th>
+        <th scope="col">Active</th>
+        <th scope="col">Staff</th>
+        <th scope="col">Superuser</th>
         <th scope="col" class="text-center">Actions <i class="text-warning fa-solid fa-bullseye"></i></th>
       </tr>
     </thead>
@@ -25,11 +29,14 @@
       {% for user in users %}
       <tr>
         <th scope="row">{{forloop.counter}}</th>
-        <td>{{user}}</td>
-        <td>{{user.first_name}}</td>
-        <td>{{user.last_name}}</td>
-        <td>{{user.email|truncatechars:10}}</td>
-        <td class="text-center">
+        <td>{{user.first_name}}&nbsp;{{user.last_name}}</td>
+        <td>{{user.username}}</td>
+        <td>{{user.email}}</td>
+        <td>{% for group in user.groups.all %} {{ group.name }}{% if not forloop.last %},{% endif %}{% endfor %}</td>
+        <td>{% if user.is_active %} <i class="fa-solid fa-circle-check bg-light text-success" style="border-radius: 5px; padding: 5px;"></i> {% else %} <i class="text-danger bg-light fa-regular fa-star" style="border-radius: 5px; padding: 5px;"></i>{% endif %}</td>
+        <td>{% if user.is_staff %} <i class="fa-solid fa-circle-check bg-light text-success" style="border-radius: 5px; padding: 5px;"></i>{% else %}<i class="text-danger bg-light fa-regular fa-circle-xmark" style="border-radius: 5px; padding: 5px;"></i>{% endif %}</td>
+        <td>{% if user.is_superuser %} <i class="fa-solid fa-circle-check bg-light text-success" style="border-radius: 5px; padding: 5px;"></i>{% else %}<i class="text-danger bg-light fa-regular fa-circle-xmark" style="border-radius: 5px; padding: 5px;"></i>{% endif %}</td>
+        <td class="text-center px-4">
             <a href="{% url 'edit_user' user.id %}" class="text-success px-2 bg-light" style="border-radius: 5px;"
               ><i class="fa-regular fa-pen-to-square"></i></a
             >&nbsp;&nbsp;
@@ -43,5 +50,7 @@
 </div>
 
 </div>
-
+{% else %}
+<h4>You do not have special permissions</h4>
+{% endif %}
 {% endblock %}
