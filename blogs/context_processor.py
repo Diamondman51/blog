@@ -14,8 +14,10 @@ def header(req):
 def get_about(request):
     about = About.objects.all()
     links = Social_links.objects.all()
+    telegram = links.get(name='Telegram')
     context = {
         'about': about,
-        'links': links
+        'links': links,
+        'telegram': telegram
         }
     return context

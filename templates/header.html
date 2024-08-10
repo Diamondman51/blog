@@ -12,31 +12,46 @@
     <script src="https://kit.fontawesome.com/aa9c6364b5.js" crossorigin="anonymous"></script>
   </head>
 <body>
-    <div class="container">
-      <header class="blog-header py-3">
-        <div class="row flex-nowrap justify-content-between align-items-center">
-          <div class="col-3 pt-1">
-            <a class="blog-header-logo text-dark" href="{% url 'blogs' %}">Django Blog</a>
-          </div>
-
-          <form class="d-flex col-6" action="{% url 'search' %}" method="get">
-            {% if user.is_authenticated %}
-            <input class="form-control me-2" type="search" name="keyword" value="{{keyword}}" placeholder="Search" aria-label="Search">&nbsp;
-            <button class="btn btn-outline-success" id="button-search" type="submit">Search</button>
-            {% endif %}
-          </form>
-
-          <div class="col-3 d-flex justify-content-end align-items-center">
-            {% if user.is_authenticated %}
-            {{user}}&nbsp;|&nbsp;<span><a href="{% url 'dashboard' %}" class="btn btn-outline-warning text-dark" style="text-decoration: none;">Dashboard</a>&nbsp</span><a class="btn btn-outline-primary" href="{% url 'logout' %}">Logout</a>
-            {% else %}
-            <a class="btn btn-sm btn-warning" href="{% url 'login' %}">Login</a> &nbsp;
-            <a class="btn btn-sm btn-outline-secondary" href="{% url 'register' %}">Register</a>
-            {% endif %}
-          </div>
-        </div>
-      </header>
-
+  <div class="container">
+      <!-- Nav start -->
+      
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand mr-auto blog-header-logo text-dark" href="{% url 'blogs' %}">Blogs</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <form class="form-inline my-2 my-lg-0 ml-auto" action="{% url 'search' %}" method="get">
+      {% if user.is_authenticated %}
+      <input class="form-control mr-sm-2" type="search" name="keyword" value="{{keyword}}" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      {% endif %}
+    </form>
+    <ul class="navbar-nav ml-auto">
+    {% if user.is_authenticated %}
+      <li class="nav-item active">
+        <a class="nav-link" href="#">{{user}} <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item mr-1 mb-2">
+        <a href="{% url 'dashboard' %}" class="btn btn-outline-warning text-dark">Dashboard</a>
+      </li>
+      <li class="nav-item">
+        <a href="{% url 'logout' %}" class="btn btn-outline-primary text-dark">Logout</a>
+      </li>
+      {% else %}
+      <li class="nav-item mr-1">
+        <a href="{% url 'login' %}" class="btn btn-sm btn-warning">Login</a>
+      </li>
+      <li class="nav-item">
+        <a href="{% url 'register' %}" class="btn btn-sm btn-outline-secondary">Register</a>
+      </li>
+      {% endif %}
+    </ul>
+  </div>
+</nav>
+    
+      <!-- Nav end -->
+       
       <div class="nav-scroller py-1 mb-2">
         <nav class="nav d-flex justify-content-between">
           {% if user.is_authenticated %}
@@ -51,7 +66,10 @@
     {% endblock %}
     </div>
 <footer class="blog-footer">
-  <p>Django blog built with � by <a href="#">Shavkatov Javakhir</a></p>
+  <p>Django blog built with � by <a href="{{telegram.link}}" target="_blank">Shavkatov Javakhir</a></p>
 </footer>
+<!-- JavaScript -->
+ <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
 </body>
 </html>
