@@ -2,7 +2,7 @@
 <style></style>
 <div class="row">
 <div class="col-3">
-  <h2>Blogs</h2>
+  {% include 'left_side.html' %}
 </div>
 <div class="col-9 text-right">
   <a href="{% url 'add_blog' %}" class="btn bg-primary text-light">Add Blog</a>
@@ -10,12 +10,10 @@
 </div>
 <div class="row my-3">
   <!-- Left side -->
-  {% include 'left_side.html' %}
   <!-- Right side -->
-  <div class="col-9">
+  <div class="col-12" style="overflow-x: auto;">
     <table
-      class="table table-dark table-hover"
-      style="border-radius: 0 0 15px 15px"
+      class="table table-hover"
     >
       <tr class="text-center">
         <th scope="col">№</th>

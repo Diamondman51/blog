@@ -4,7 +4,7 @@
 {% block content %}
 {% load crispy_forms_tags %}
 <h1 class="text-center">Login</h1>
-<form action="{% url 'login' %}" method="post" style="width: 500px; margin: auto; padding: 30px 0">
+<form class="col-9" action="{% url 'login' %}" method="post" style="width: 500px; margin: auto; padding: 30px 0">
     {% csrf_token %}
     {{form|crispy}}
         <div class="button text-right">

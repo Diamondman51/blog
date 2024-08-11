@@ -29,20 +29,20 @@
     </form>
     <ul class="navbar-nav ml-auto">
     {% if user.is_authenticated %}
-      <li class="nav-item active">
+      <li class="nav-item active text-left">
         <a class="nav-link" href="#">{{user}} <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item mr-1 mb-2">
+      <li class="nav-item mr-1 mb-2 text-left">
         <a href="{% url 'dashboard' %}" class="btn btn-outline-warning text-dark">Dashboard</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item text-left">
         <a href="{% url 'logout' %}" class="btn btn-outline-primary text-dark">Logout</a>
       </li>
       {% else %}
-      <li class="nav-item mr-1">
+      <li class="nav-item mr-1 text-left mb-1">
         <a href="{% url 'login' %}" class="btn btn-sm btn-warning">Login</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item text-left">
         <a href="{% url 'register' %}" class="btn btn-sm btn-outline-secondary">Register</a>
       </li>
       {% endif %}
@@ -51,7 +51,7 @@
 </nav>
     
       <!-- Nav end -->
-       
+
       <div class="nav-scroller py-1 mb-2">
         <nav class="nav d-flex justify-content-between">
           {% if user.is_authenticated %}

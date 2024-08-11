@@ -12,7 +12,7 @@
 
   <div class="col-9">
     <h3 class="text-center">Edit user</h3>
-    <form action="{% url 'edit_user' user.id %}" method="post" style="height: auto; width: 600px; margin: auto; padding: 30px 0">
+    <form class="col-9" action="{% url 'edit_user' user.id %}" method="post" style="height: auto; width: 600px; margin: auto; padding: 30px 0">
         {% csrf_token %}
         {{form|crispy}}
         <div class="text-right">
