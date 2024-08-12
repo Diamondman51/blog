@@ -9,13 +9,14 @@
   <!-- Left side -->
   <!-- Right side -->
 
-  <div class="col-9 col-sm-9 col-md-9">
+  <div class="col-12 col-sm-12 col-md-12">
     <h3 class="text-center">Add user</h3>
-    <form class="col-9" action="" method="post" style="height: auto; width: 600px; margin: auto; padding: 30px 0">
+    <form class="col-12" action="" method="post" style="height: auto; width: 600px; margin: auto; padding: 30px 0">
       {% csrf_token %}
       <div class="form-group">
+        {{form.errors|crispy}}
         {{form|crispy}}
-          <div class="text-right">
+        <div class="text-right">
             <button type="submit" class="btn btn-primary">Add</button>
         </div>
       </div>  

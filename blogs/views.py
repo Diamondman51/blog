@@ -98,55 +98,6 @@ def register(request):
         return render(request, "register.html", context)
     
 
-# from django.shortcuts import render, redirect
-# from django.contrib.auth.forms import AuthenticationForm
-# from django.contrib import auth
-# from django.http import HttpResponseRedirect
-
-# def login(request):
-#     if request.method == 'POST':
-#         form = AuthenticationForm(request, request.POST)
-#         if form.is_valid():
-#             username = form.cleaned_data['username']
-#             password = form.cleaned_data['password']
-#             user = auth.authenticate(username=username, password=password)
-#             if user is not None:
-#                 auth.login(request, user)
-                
-#                 # Redirect to the pre-last page stored in the session
-#                 last_urls = request.session.get('last_urls', ['/'])
-#                 if len(last_urls) > 1:
-#                     return HttpResponseRedirect(last_urls[-2])
-#                 else:
-#                     return HttpResponseRedirect('/')
-#             else:
-#                 # Handle invalid authentication
-#                 return redirect('login')
-#         else:
-#             # Handle form errors
-#             return redirect('login')
-#     else:
-#         # Store the current path before rendering the login form
-#         last_urls = request.session.get('last_urls', [])
-#         current_path = request.path_info
-
-#         if current_path not in last_urls:
-#             last_urls.append(current_path)
-
-#         # Keep only the last two URLs
-#         if len(last_urls) > 2:
-#             last_urls.pop(0)
-
-#         # Store the updated list in the session
-#         request.session['last_urls'] = last_urls
-        
-#         form = AuthenticationForm()
-#         context = {
-#             'form': form
-#         }
-#         return render(request, "login.html", context)
-
-
 def login(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, request.POST)

@@ -1,15 +1,15 @@
 <div class="dropdown col-3">
   <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
     {% if '/dashboard/' == request.path %} Dashboard
-    {% elif '/dashboard/categories/' == request.path or '/dashboard/categories/add/' == request.path %} Categories
-    {% elif '/dashboard/blogs/' == request.path or '/dashboard/blogs/add/' == request.path %} Blogs
+    {% elif '/dashboard/categories/' == request.path or '/dashboard/categories/add/' == request.path or '/dashboard/categories/edit/' in request.path %} Categories
+    {% elif '/dashboard/blogs/' == request.path or '/dashboard/blogs/add/' == request.path or '/dashboard/blogs/edit/' in request.path %} Blogs
     {% elif '/dashboard/users/' == request.path or '/dashboard/users/add/' == request.path or '/dashboard/users/edit/' in request.path %} Users
     {% endif %}
   </button>
   <div class="dropdown-menu">
     <a href="{% url 'dashboard' %}" class="dropdown-item {% if '/dashboard/' == request.path %} active{% endif %}" type="button">Dashboard</a>
     <a href="{% url 'categories' %}" class="dropdown-item {% if '/dashboard/categories/' == request.path or '/dashboard/categories/add/' == request.path %} active {% endif %}" type="button">Categories</a>
-    <a href="{% url 'dashboard_blogs' %}" class="dropdown-item {% if '/dashboard/blogs/' == request.path or '/dashboard/blogs/add/' == request.path %} active {% endif %}" type="button">Blogs</a>
+    <a href="{% url 'dashboard_blogs' %}" class="dropdown-item {% if '/dashboard/blogs/' == request.path or '/dashboard/blogs/add/' == request.path or '/dashboard/blogs/edit/' in request.path %} active {% endif %}" type="button">Blogs</a>
     {% if perms.auth.view_user %}
     <a href="{% url 'users' %}" class="dropdown-item {% if '/dashboard/users/' == request.path or '/dashboard/users/add/' == request.path or '/dashboard/users/edit/' in request.path %} active {% endif %}" type="button">Users</a>
     {% endif %}

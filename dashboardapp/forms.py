@@ -25,9 +25,17 @@ class BlogForm(forms.ModelForm):
 
 
 class AddUserForm(UserCreationForm):
+    email = forms.EmailField(required=True)
+
     class Meta:
         model = User
-        fields = ('username', 'email', "first_name", "last_name", 'is_active', 'is_staff', 'groups', 'user_permissions')
+        fields = ('username', 'email', 'first_name', 'last_name', 'is_active', 'is_staff', 'groups', 'user_permissions')
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if User.objects.filter(email=email).exists():
+            raise forms.ValidationError("This email address is already in use.")
+        return email
     def __init__(self, *args, **kwargs):
         super(AddUserForm, self).__init__(*args, **kwargs)
         self.fields['user_permissions'].queryset = Permission.objects.filter(
@@ -88,6 +96,13 @@ class EditUserForm(UserChangeForm):
         if self.cleaned_data['password2']:
             if password != password2:
                 raise forms.ValidationError("Passwords do not match.")
+    
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        user_id = self.instance.id
+        if User.objects.filter(email=email).exclude(id=user_id).exists():
+            raise forms.ValidationError("This email address is already in use.")
+        return email
 
     def save(self, commit=True):
         user = super().save(commit=False) 

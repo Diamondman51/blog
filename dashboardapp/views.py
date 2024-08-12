@@ -31,7 +31,11 @@ def add_category(request):
         if form.is_valid():
             form.save()
         else:
+            context = {
+            'form': form
+            }
             print(form.errors)
+            return render(request, "add_category.html", context)
         return redirect('categories')
     elif request.method == "GET":
         form = CategoryForm()
@@ -61,6 +65,11 @@ def edit_category(request, pk):
         if form.is_valid():
             form.save()
             return redirect("categories")
+        else:
+            context = {
+                'form': form,
+            }
+            return render(request, 'edit_category.html')
 
 
 @login_required(login_url='login')
@@ -83,12 +92,13 @@ def add_blog(request):
             blog.save()
             blog.slug = slugify(blog.title + ' ' + str(blog.id))
             blog.save()
-            blog.slug += slugify(blog.slug + ' ' + '22')
-            blog.save() 
             return redirect('dashboard_blogs')
         else:
             print(form.errors)
-            return HttpResponse('Not found')
+            context = {
+            'form': form
+                }
+            return render(request, "add_blog.html", context)
     elif request.method == "GET":
         form = BlogForm()
         context = {
@@ -114,7 +124,10 @@ def edit_blog(request, pk):
             return redirect('dashboard_blogs')
         else:
             print(form.errors)
-            return redirect("dashboard_blogs")
+            context = {
+            'form': form
+                }
+            return render(request, "edit_blog.html", context)
 
     elif request.method == "GET":
         form = BlogForm(instance=blog)
@@ -145,6 +158,11 @@ def add_user(request):
         else:
             print('llllllllllllllllllllllllllllllllllllllllllllllllllllllllll')
             print(form.errors)
+            context = {
+                'form': form,
+                }
+            return render(request, 'add_user.html', context)
+        
     elif request.method == 'GET':
         form = AddUserForm()
         context = {
@@ -163,7 +181,7 @@ def delete_user(request, pk):
 
 @login_required(login_url='login')
 def edit_user(request, pk):
-    user = User.objects.get(pk=pk)
+    user = get_object_or_404(User, pk=pk)
     if request.method == "POST":
         form = EditUserForm(request.POST, instance=user)
         if form.is_valid():
@@ -172,7 +190,11 @@ def edit_user(request, pk):
         else:
             print("------------------------------------------------------")
             print(form.errors)
-            return redirect("edit_user", pk=pk)
+            context = {
+                'form': form,
+                "user": user,
+            }
+            return render(request, "edit_user.html", context)
     elif request.method == "GET":
         form = EditUserForm(instance=user)
         context = {
@@ -180,3 +202,4 @@ def edit_user(request, pk):
             'user': user,
         }
         return render(request, 'edit_user.html', context)
+    
