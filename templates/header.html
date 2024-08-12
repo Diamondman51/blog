@@ -12,7 +12,14 @@
     <script src="https://kit.fontawesome.com/aa9c6364b5.js" crossorigin="anonymous"></script>
   </head>
 <body>
-  <div class="container">
+<style>
+@media (max-width: 991px) {
+  .fl {
+    min-width: 100%;
+  }
+}
+</style>
+<div class="container">
       <!-- Nav start -->
       
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -23,26 +30,26 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <form class="form-inline my-2 my-lg-0 ml-auto" action="{% url 'search' %}" method="get">
       {% if user.is_authenticated %}
-      <input class="form-control mr-sm-2" type="search" name="keyword" value="{{keyword}}" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      <input class="form-control fl mr-sm-2" type="search" name="keyword" value="{{keyword}}" placeholder="Search" aria-label="Search">
+      <a class="btn btn-outline-success fl my-2 my-sm-0" type="submit" style="max-width: 100%;">Search</a>
       {% endif %}
     </form>
     <ul class="navbar-nav ml-auto">
     {% if user.is_authenticated %}
-      <li class="nav-item active text-left">
-        <a class="nav-link" href="#">{{user}} <span class="sr-only">(current)</span></a>
+      <li class="nav-item active text-right">
+        <a class="nav-link" href="#">User {{user}} <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item mr-1 mb-2 text-left">
-        <a href="{% url 'dashboard' %}" class="btn btn-outline-warning text-dark">Dashboard</a>
+      <li class="nav-item mr-1 mb-2 text-right">
+        <a href="{% url 'dashboard' %}" class="btn fl btn-outline-warning text-dark">Dashboard</a>
       </li>
-      <li class="nav-item text-left">
-        <a href="{% url 'logout' %}" class="btn btn-outline-primary text-dark">Logout</a>
+      <li class="nav-item text-right">
+        <a href="{% url 'logout' %}" class="btn fl btn-outline-primary text-dark">Logout</a>
       </li>
       {% else %}
-      <li class="nav-item mr-1 text-left mb-1">
+      <li class="nav-item mr-1 text-right mb-1">
         <a href="{% url 'login' %}" class="btn btn-sm btn-warning">Login</a>
       </li>
-      <li class="nav-item text-left">
+      <li class="nav-item text-right">
         <a href="{% url 'register' %}" class="btn btn-sm btn-outline-secondary">Register</a>
       </li>
       {% endif %}
