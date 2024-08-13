@@ -31,7 +31,7 @@
     <form class="form-inline my-2 my-lg-0 ml-auto" action="{% url 'search' %}" method="get">
       {% if user.is_authenticated %}
       <input class="form-control fl mr-sm-2" type="search" name="keyword" value="{{keyword}}" placeholder="Search" aria-label="Search">
-      <a class="btn btn-outline-success fl my-2 my-sm-0" type="submit" style="max-width: 100%;">Search</a>
+      <button class="btn btn-outline-success fl my-2 my-sm-0" type="submit" style="max-width: 100%;">Search</button>
       {% endif %}
     </form>
     <ul class="navbar-nav ml-auto">
