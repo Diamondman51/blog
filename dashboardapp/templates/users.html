@@ -28,7 +28,7 @@
         <th scope="row">{{forloop.counter}}</th>
         <td>{{user.first_name}}&nbsp;{{user.last_name}}</td>
         <td>{{user.username}}</td>
-        <td>{{user.email}}</td>
+        <td>{{user.email|truncatechars:10}}</td>
         <td>{% for group in user.groups.all %} {{ group.name }}{% if not forloop.last %},{% endif %}{% endfor %}</td>
         <td>{% if user.is_active %} <i class="fa-solid fa-circle-check bg-light text-success" style="border-radius: 5px; padding: 5px;"></i> {% else %} <i class="text-danger bg-light fa-regular fa-star" style="border-radius: 5px; padding: 5px;"></i>{% endif %}</td>
         <td>{% if user.is_staff %} <i class="fa-solid fa-circle-check bg-light text-success" style="border-radius: 5px; padding: 5px;"></i>{% else %}<i class="text-danger bg-light fa-regular fa-circle-xmark" style="border-radius: 5px; padding: 5px;"></i>{% endif %}</td>
