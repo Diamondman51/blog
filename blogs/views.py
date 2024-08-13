@@ -43,16 +43,22 @@ def blog(request, blog_slug):
         }
         return render(request, "blog.html", context)
     elif request.method == "POST":
-        if request.POST.get("comment",):
+        if request.POST.get("comment").strip():
             comment = Comment()
             comment.user = request.user
             comment.blog = blog
             comment.text = request.POST.get("comment")
             comment.save()
-            return HttpResponseRedirect(request.path_info)
+            return HttpResponseRedirect('#comment-text')
         else:
             return HttpResponseRedirect(request.path_info)
         
+
+def delete_comment(request, comment_id):
+    comment = get_object_or_404(Comment, id=comment_id)
+    comment.delete()
+    return HttpResponseRedirect(request.META.get("HTTP_REFERER", "") + "#comment-text")
+
 
 # @login_required(login_url='login')
 def posts_by_category(request, category_id):
