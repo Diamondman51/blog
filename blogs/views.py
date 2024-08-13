@@ -96,6 +96,11 @@ def register(request):
         if form.is_valid():
             form.save()
             return redirect("login")
+        else:
+            context = {
+                'form': form
+            }
+            return render(request, "register.html", context)
     else:
         form = RegistrationForm()
         context = {
@@ -116,8 +121,11 @@ def login(request):
                 return redirect('blogs')
         else:
             print('*****************************************************************************************************')
-            print(request.errors)
-            return redirect('login')
+            print(form.errors)
+            context = {
+                'form': form
+            }
+            return render(request, 'login.html', context)
     else:
         # pathth = request.path_info
         form = AuthenticationForm()
