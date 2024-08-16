@@ -49,7 +49,8 @@ def blog(request, blog_slug):
             comment.blog = blog
             comment.text = request.POST.get("comment")
             comment.save()
-            return HttpResponseRedirect('#comment-text')
+            # return HttpResponseRedirect('#comment-text')
+            return HttpResponseRedirect('metan-narxini-bozor-belgilaydi-bosh-vazir-matbuot')
         else:
             return HttpResponseRedirect(request.path_info)
         

@@ -36,14 +36,19 @@ class AddUserForm(UserCreationForm):
         if User.objects.filter(email=email).exists():
             raise forms.ValidationError("This email address is already in use.")
         return email
-    def __init__(self, *args, **kwargs):
-        super(AddUserForm, self).__init__(*args, **kwargs)
-        self.fields['user_permissions'].queryset = Permission.objects.filter(
-            codename__in=['add_blog', 'view_blog', 'change_blog', 'delete_blog', 'add_category', 'view_category', 'change_category', 'delete_category']
-        )
+    # def __init__(self, *args, **kwargs):
+    #     super(AddUserForm, self).__init__(*args, **kwargs)
+    #     self.fields['user_permissions'].queryset = Permission.objects.filter(
+    #         codename__in=['add_user', 'add_blog', 'view_blog', 'change_blog', 'delete_blog', 'add_category', 'view_category', 'change_category', 'delete_category']
+    #     )
+    
+    user_permissions = forms.ModelMultipleChoiceField(
+    queryset=Permission.objects.filter(codename__in=['add_blog', 'view_blog', 'change_blog', 'delete_blog', 'add_category', 'view_category', 'change_category', 'delete_category']),
+    widget=forms.SelectMultiple,
+    required=False 
+    )
 
-
-class EditUserForm(UserChangeForm):
+class EditUserForm(forms.ModelForm):
     password = forms.CharField(
         widget=forms.PasswordInput(attrs={'placeholder': 'New Password'}), 
         label="New Password", 
@@ -67,7 +72,7 @@ class EditUserForm(UserChangeForm):
 
     class Meta:
         model = User
-        fields = ('username', 'email', "first_name", "last_name", 'is_active', 'is_staff', 'groups', 'user_permissions')
+        fields = ('username', 'email', "first_name", "last_name", 'is_active', 'is_staff', 'groups', 'user_permissions',)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -82,8 +87,10 @@ class EditUserForm(UserChangeForm):
         self.fields['first_name'].label = "First Name"
         self.fields['last_name'].label = "Last Name"
         # If you don't want to require a password on update:
+
         self.fields['password'].required = False 
         self.fields['password2'].required = False
+
 
     def clean(self):
         """Verify both passwords match."""
@@ -113,4 +120,3 @@ class EditUserForm(UserChangeForm):
             user.groups.set(self.cleaned_data['groups'])
             user.user_permissions.set(self.cleaned_data['user_permissions'])
         return user
-    

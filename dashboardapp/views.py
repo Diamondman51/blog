@@ -1,6 +1,5 @@
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import User
-from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 
 from blogs.models import Blog
@@ -118,7 +117,7 @@ def delete_blog(request, pk):
 def edit_blog(request, pk):
     blog = get_object_or_404(Blog, pk=pk)
     if request.method == 'POST':
-        form = BlogForm(request.POST, instance=blog)
+        form = BlogForm(request.POST, request.FILES, instance=blog)
         if form.is_valid():
             form.save()
             return redirect('dashboard_blogs')
@@ -202,4 +201,3 @@ def edit_user(request, pk):
             'user': user,
         }
         return render(request, 'edit_user.html', context)
-    
