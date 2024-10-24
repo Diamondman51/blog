@@ -43,10 +43,11 @@ class AddUserForm(UserCreationForm):
     #     )
     
     user_permissions = forms.ModelMultipleChoiceField(
-    queryset=Permission.objects.filter(codename__in=['add_blog', 'view_blog', 'change_blog', 'delete_blog', 'add_category', 'view_category', 'change_category', 'delete_category']),
-    widget=forms.SelectMultiple,
-    required=False 
+        queryset=Permission.objects.filter(codename__in=['add_blog', 'view_blog', 'change_blog', 'delete_blog', 'add_category', 'view_category', 'change_category', 'delete_category']),
+        widget=forms.SelectMultiple,
+        required=False
     )
+
 
 class EditUserForm(forms.ModelForm):
     password = forms.CharField(
@@ -90,7 +91,6 @@ class EditUserForm(forms.ModelForm):
 
         self.fields['password'].required = False 
         self.fields['password2'].required = False
-
 
     def clean(self):
         """Verify both passwords match."""

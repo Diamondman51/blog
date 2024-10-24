@@ -10,17 +10,22 @@ from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
 
 
-
 # Create your views here.
+
+
 # @login_required(login_url='login')
+
+
 def blogs(request):
     blog = Blog.objects.filter(status=1)
     featured = blog.filter(is_featured=True)
     random_blog = random.choice(featured)
+    last_blog = random.choice(blog)
     context = {
         'blogs': blog,
         'featured': featured,
         'random_blog': random_blog,
+        'last_blog': last_blog
     }
 
     return render(request, 'blogs.html', context)
@@ -53,7 +58,7 @@ def blog(request, blog_slug):
             return HttpResponseRedirect('metan-narxini-bozor-belgilaydi-bosh-vazir-matbuot')
         else:
             return HttpResponseRedirect(request.path_info)
-        
+
 
 def delete_comment(request, comment_id):
     comment = get_object_or_404(Comment, id=comment_id)
@@ -108,7 +113,7 @@ def register(request):
             'form': form
         }
         return render(request, "register.html", context)
-    
+
 
 def login(request):
     if request.method == 'POST':
@@ -121,7 +126,8 @@ def login(request):
                 auth.login(request, user)
                 return redirect('blogs')
         else:
-            print('*****************************************************************************************************')
+            print(
+                '*****************************************************************************************************')
             print(form.errors)
             context = {
                 'form': form
