@@ -55,7 +55,7 @@ def blog(request, blog_slug):
             comment.text = request.POST.get("comment")
             comment.save()
             # return HttpResponseRedirect('#comment-text')
-            return HttpResponseRedirect('metan-narxini-bozor-belgilaydi-bosh-vazir-matbuot')
+            return HttpResponseRedirect(request.META.get("HTTP_REFERER", "") + "#comment-text")
         else:
             return HttpResponseRedirect(request.path_info)
 
